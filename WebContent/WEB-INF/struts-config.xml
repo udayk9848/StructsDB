@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts-config PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+"http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+
+
+<struts-config>
+	<form-beans>
+		<form-bean name="registerForm" type="com.uday.struts.form.UserRegisterForm" />
+		<form-bean name="loginForm" type="com.uday.struts.form.LoginForm" />
+		<form-bean name="CreateForm" type="com.uday.struts.form.CreateForm" />
+		<form-bean name="DeleteForm" type="com.uday.struts.form.DeleteForm" />
+		<form-bean name="UpdateForm" type="com.uday.struts.form.UpdateForm" />
+		<form-bean name="UpdatingForm" type="com.uday.struts.form.UpdatingForm" />
+		<form-bean name="SearchForm" type="com.uday.struts.form.SearchForm" />
+		<form-bean name="LogoutForm" type="com.uday.struts.form.LogoutForm" />
+		<form-bean name="EmployeeUpdatingForm" type="com.uday.struts.form.EmployeeUpdatingForm" />
+	</form-beans>
+
+	<action-mappings>
+		<action name="loginForm" path="/login"
+			type="com.uday.struts.action.UserRegisterAction" scope="session"
+			input="/login.jsp">
+			<forward name="failure" path="/login.jsp" redirect="true" />
+			<forward name="failureE" path="/login.jsp" redirect="true" />
+			<forward name="success" path="/UserManagement.jsp" redirect="true" />
+			<forward name="successE" path="/EmployeeManagement.jsp" redirect="true" />
+		</action>
+		
+		<action name="UpdatingForm" path="/Updating"
+			type="com.uday.struts.action.UpdatingAction" 
+			input="/Updating.jsp">
+			
+			<forward name="success" path="/UserSuccess.jsp" redirect="true" />
+		</action>
+		 
+		 <action name="EmployeeUpdatingForm" path="/EmployeeUpdating"
+			type="com.uday.struts.action.EmployeeUpdatingAction" 
+			input="/EmployeeManagement.jsp">
+			<forward name="failure" path="/EmployeeManagement.jsp" redirect="true" />
+			<forward name="success" path="/UpdateEmployeeSucess.jsp" redirect="true" />
+		</action>
+       <!--  <action input="/UserManagement.jsp" name="CreateForm" path="/Create"
+            type="com.uday.struts.action.CreateAction">
+            <forward name="failure" path="/Create" redirect="true" />
+			<forward name="success" path="/UserSuccess.jsp" redirect="true" />           
+        </action> -->
+        
+       <!--  <action     input="Logout.jsp"  name="LogoutForm" path="/logout" 
+            type="com.uday.struts.action.LogoutAction">
+            <forward name="failure" path="/login.jsp" redirect="true" />
+			<forward name="success" path="/login.jsp" redirect="true" />           
+        </action> -->
+        <action name="CreateForm" path="/Create" type="com.uday.struts.action.CreateAction"
+	     scope="session" input="/Create.jsp" validate="true">
+	        <forward name="success" path="/UserSuccess.jsp" redirect="true"/>
+	    </action>
+	    
+        <action input="/Delete.jsp" name="DeleteForm" path="/Delete"
+            type="com.uday.struts.action.DeleteAction">
+            <forward name="failure" path="/UserDelete.jsp" redirect="true" />
+			<forward name="success" path="/UserDelete.jsp" redirect="true" />
+        </action>
+        
+        <action input="/Update.jsp" name="UpdateForm" path="/Update"
+            type="com.uday.struts.action.UpdateAction">
+            <forward name="failure" path="/UserUpdate.jsp" redirect="true" />
+			<forward name="success" path="/Updating.jsp" redirect="true" />
+        </action>
+        <action input="/Search.jsp" name="SearchForm" path="/Search"
+            type="com.uday.struts.action.SearchAction" >
+            <forward name="failure" path="/UserDelete.jsp" redirect="true" />
+			<forward name="success" path="/Serchdetails.jsp" redirect="true" />
+           
+        </action>
+    
+		<!-- <action input="/login.jsp" name="loginForm" path="/login" type="com.uday.struts.action.UserRegisterAction"> 
+			<forward name="success" path="/UserManagement.jsp" /> </action> -->
+		<action path="/user" parameter="parameter" 
+			type="com.uday.struts.action.UserManagementAction">
+			<forward name="success" path="/Create.jsp" />
+			<forward name="successD" path="/Delete.jsp" />
+			<forward name="successU" path="/Update.jsp" />
+			<forward name="successB" path="/Search.jsp" />
+			<forward name="successl" path="/login.jsp" />
+			<forward name="failure" path="/Create.jsp" />
+		</action>
+		
+		<action path="/Employee" parameter="parameter" 
+			type="com.uday.struts.action.EmployeeManagementAction">
+			<!-- <forward name="success" path="/Create.jsp" />
+			<forward name="successD" path="/Delete.jsp" /> -->
+			<forward name="successU" path="/EmployeeUpdating.jsp" />
+			<forward name="successl" path="/login.jsp" />
+			<!-- <forward name="failure" path="/Create.jsp" />
+			<forward name="successB" path="/Search.jsp" /> -->
+		</action>
+	</action-mappings>
+
+	<message-resources parameter="com/uday/struts/action/ApplicationResource" />
+	
+
+</struts-config>

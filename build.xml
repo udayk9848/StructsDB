@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<project>
+		<target name="clean">
+		        <delete dir="${project.web.dir}/WebContent/WEB-INF/build"/>
+		    </target>
+		 <target name="compile">
+		        <mkdir dir="${project.web.dir}/WebContent/WEB-INF/classes"/>
+		        <javac srcdir="src" destdir="${project.web.dir}/WebContent/WEB-INF/classes"/>
+		    </target>
+		   
+		<target name="war">
+				        <mkdir dir="${project.web.dir}/WebContent/WEB-INF/war"/>
+			<copy includeemptydirs="false" todir="${project.web.dir}/WebContent/WEB-INF/classes">
+			              	            <fileset dir="build/classes">
+			              	            <include name="**/*.class"/>
+			              	            </fileset>
+			              	    </copy>
+				        <war destfile="${project.web.dir}/WebContent/WEB-INF/war/StrutsDBExample.war" basedir="${project.web.dir}/WebContent/WEB-INF/classes">
+				           
+				        </war>
+				    </target>
+
+		    <target name="run">
+		        <java war="${project.web.dir}/WebContent/WEB-INF/war" fork="true"/>
+		    </target>
+              	
+</project>
